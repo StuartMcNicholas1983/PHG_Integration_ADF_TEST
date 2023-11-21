@@ -1,5 +1,13 @@
 {
 	"name": "phg-test-datafactory",
+	"properties": {
+		"globalParameters": {
+			"Environment": {
+				"type": "string",
+				"value": "TEST"
+			}
+		}
+	},
 	"location": "ukwest",
 	"identity": {
 		"type": "SystemAssigned",

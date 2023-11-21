@@ -1,0 +1,9 @@
+{
+	"name": "phg-test-datafactory",
+	"location": "ukwest",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "8bff158e-95c6-4b34-aad3-a762b2d3a671",
+		"tenantId": "668364d4-3d43-4051-adbc-5bbb517a46fc"
+	}
+}

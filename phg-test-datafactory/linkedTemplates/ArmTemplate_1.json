@@ -16543,7 +16543,7 @@
 						"type": "SetVariable",
 						"dependsOn": [
 							{
-								"activity": "SequenceGroup - Inactive",
+								"activity": "LoadType2",
 								"dependencyConditions": [
 									"Completed"
 								]
@@ -17277,6 +17277,55 @@
 											}
 										}
 									}
+								}
+							]
+						}
+					},
+					{
+						"name": "LoadType2",
+						"type": "Switch",
+						"dependsOn": [
+							{
+								"activity": "SequenceGroup - Inactive",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"on": {
+								"value": "@pipeline().parameters.LoadType",
+								"type": "Expression"
+							},
+							"cases": [
+								{
+									"value": "Full",
+									"activities": [
+										{
+											"name": "Full Load Reset - Post",
+											"type": "ExecutePipeline",
+											"dependsOn": [],
+											"userProperties": [],
+											"typeProperties": {
+												"pipeline": {
+													"referenceName": "PL_FullLoadReset_Post",
+													"type": "PipelineReference"
+												},
+												"waitOnCompletion": true,
+												"parameters": {
+													"PipelineName": {
+														"value": "@pipeline().parameters.PipelineName",
+														"type": "Expression"
+													},
+													"LoadType": {
+														"value": "@pipeline().parameters.LoadType",
+														"type": "Expression"
+													}
+												}
+											}
+										}
+									]
 								}
 							]
 						}

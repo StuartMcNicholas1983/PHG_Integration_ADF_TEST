@@ -267,7 +267,7 @@
 												},
 												"intDestEntityRowCount": {
 													"value": {
-														"value": "@activity('Script - Entity RowCount').output.outputParameters.RowCount\n\n\n",
+														"value": "@activity('Script - Entity RowCount').output.outputParameters.RowCount",
 														"type": "Expression"
 													},
 													"type": "Int32"

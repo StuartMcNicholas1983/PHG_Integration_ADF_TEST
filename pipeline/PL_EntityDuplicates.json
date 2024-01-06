@@ -89,6 +89,17 @@
 									"queryTimeout": "02:00:00",
 									"partitionOption": "None"
 								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
 								"enableStaging": false,
 								"enableSkipIncompatibleRow": false,
 								"translator": {
@@ -97,54 +108,69 @@
 										{
 											"source": {
 												"name": "SrcSystem",
-												"type": "String"
+												"type": "String",
+												"physicalType": "nvarchar"
 											},
 											"sink": {
 												"name": "SrcSystem",
-												"type": "String"
+												"type": "String",
+												"physicalType": "nvarchar"
 											}
 										},
 										{
 											"source": {
 												"name": "EntityView",
-												"type": "String"
+												"type": "String",
+												"physicalType": "varchar"
 											},
 											"sink": {
 												"name": "EntityView",
-												"type": "String"
+												"type": "String",
+												"physicalType": "nvarchar"
 											}
 										},
 										{
 											"source": {
 												"name": "EntityAttribute",
-												"type": "String"
+												"type": "String",
+												"physicalType": "varchar"
 											},
 											"sink": {
 												"name": "EntityAttribute",
-												"type": "String"
+												"type": "String",
+												"physicalType": "nvarchar"
 											}
 										},
 										{
 											"source": {
 												"name": "AttributeValue",
-												"type": "String"
+												"type": "String",
+												"physicalType": "nvarchar"
 											},
 											"sink": {
 												"name": "AttributeValue",
-												"type": "String"
+												"type": "String",
+												"physicalType": "nvarchar"
 											}
 										},
 										{
 											"source": {
 												"name": "AttributeDuplicates",
-												"type": "Int32"
+												"type": "Int32",
+												"physicalType": "int"
 											},
 											"sink": {
 												"name": "AttributeDuplicates",
-												"type": "Int32"
+												"type": "Int32",
+												"physicalType": "int"
 											}
 										}
-									]
+									],
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
 								}
 							},
 							"inputs": [
@@ -161,6 +187,26 @@
 											"type": "Expression"
 										},
 										"SchemaName": "dbo"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DS_Datalake_PipeDelimited",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container": {
+											"value": "@item().DatalakeContainer",
+											"type": "Expression"
+										},
+										"Directory": {
+											"value": "@concat(item().Pipeline, '/Duplicates/', item().srcSystem )",
+											"type": "Expression"
+										},
+										"Filename": {
+											"value": "@concat(item().srcSystem,'_EntityDuplicates.csv')",
+											"type": "Expression"
+										}
 									}
 								}
 							]
@@ -376,12 +422,35 @@
 									"queryTimeout": "02:00:00",
 									"partitionOption": "None"
 								},
-								"enableStaging": false
+								"sink": {
+									"type": "AzureSqlSink",
+									"writeBehavior": "insert",
+									"sqlWriterUseTableLock": false
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
 							},
 							"inputs": [
 								{
 									"referenceName": "DS_SQL_Control",
 									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DS_SQL_Control_Tbl",
+									"type": "DatasetReference",
+									"parameters": {
+										"SchemaName": "dbo",
+										"TableName": "PipelineAuditDetailLog"
+									}
 								}
 							]
 						},
@@ -414,12 +483,35 @@
 									"queryTimeout": "02:00:00",
 									"partitionOption": "None"
 								},
-								"enableStaging": false
+								"sink": {
+									"type": "AzureSqlSink",
+									"writeBehavior": "insert",
+									"sqlWriterUseTableLock": false
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
 							},
 							"inputs": [
 								{
 									"referenceName": "DS_SQL_Control",
 									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DS_SQL_Control_Tbl",
+									"type": "DatasetReference",
+									"parameters": {
+										"SchemaName": "dbo",
+										"TableName": "PipelineAuditDetailLog"
+									}
 								}
 							]
 						}

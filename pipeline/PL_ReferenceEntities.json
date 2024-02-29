@@ -641,16 +641,6 @@
 															},
 															{
 																"source": {
-																	"name": "phg_code",
-																	"type": "String"
-																},
-																"sink": {
-																	"name": "phg_code",
-																	"type": "String"
-																}
-															},
-															{
-																"source": {
 																	"name": "phg_name",
 																	"type": "String"
 																},
@@ -1543,16 +1533,6 @@
 														},
 														"sink": {
 															"name": "phg_integrationkey",
-															"type": "String"
-														}
-													},
-													{
-														"source": {
-															"name": "phg_code",
-															"type": "String"
-														},
-														"sink": {
-															"name": "phg_code",
 															"type": "String"
 														}
 													},

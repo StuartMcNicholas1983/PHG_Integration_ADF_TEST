@@ -23416,6 +23416,16 @@
 																	},
 																	{
 																		"source": {
+																			"name": "phg_code",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "phg_code",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
 																			"name": "phg_name",
 																			"type": "String"
 																		},
@@ -24308,6 +24318,16 @@
 																},
 																"sink": {
 																	"name": "phg_integrationkey",
+																	"type": "String"
+																}
+															},
+															{
+																"source": {
+																	"name": "phg_code",
+																	"type": "String"
+																},
+																"sink": {
+																	"name": "phg_code",
 																	"type": "String"
 																}
 															},
@@ -28907,7 +28927,7 @@
 				"annotations": [
 					"Sequence List: [R],[L],[C],[T]"
 				],
-				"runtimeState": "Stopped",
+				"runtimeState": "Started",
 				"pipelines": [
 					{
 						"pipelineReference": {
@@ -28951,7 +28971,7 @@
 				"annotations": [
 					"Sequence List: [C],[T]"
 				],
-				"runtimeState": "Stopped",
+				"runtimeState": "Started",
 				"pipelines": [
 					{
 						"pipelineReference": {
@@ -29005,7 +29025,7 @@
 				"annotations": [
 					"Sequence List: [D],[I]"
 				],
-				"runtimeState": "Stopped",
+				"runtimeState": "Started",
 				"pipelines": [
 					{
 						"pipelineReference": {
